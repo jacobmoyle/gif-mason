@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Challenge:
+• Access an API and successfully retrieve and display the data on a page
+• Update the page without a refresh
+• A general sense of design and layout
+• The user should be able to view additional images (through clicking, scrolling etc.), that will be added to the gallery without a page refresh. 
+• The gallery should be responsive. 
