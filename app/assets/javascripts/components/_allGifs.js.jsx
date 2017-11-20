@@ -2,17 +2,14 @@ class AllGifs extends React.Component {
   render() {
     let list = this.props.gifs.map((gif) => {
       return (
-        <div key={gif.id}>
-          <Gif gif={gif} />
-        </div>
+        <Gif gif={gif} />
       )
     });
 
-    list = list.length >= 1 ? list : <h1>Nothing seems to be here...</h1>
+    list = list.length >= 1 ? list : <div className="card"><p>Nothing Here...</p></div>;
 
-    console.log("Results rendering");
     return (
-      <div>
+      <div className="card-columns">
         {list}
       </div>
     )
