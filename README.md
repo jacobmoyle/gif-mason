@@ -12,4 +12,4 @@ bundle install
 rails s
 ```
 
-Navigate to `http://localhost:3000/`.
+Navigate to [http://localhost:3000/](http://localhost:3000/).
