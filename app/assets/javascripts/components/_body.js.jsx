@@ -3,15 +3,16 @@ class Body extends React.Component {
     super(props);
 
     this.state = {
-      giphs: [],
-      search_term: "hello"
+      gifs: [],
+      offset: 0,
+      search_term: "welcome"
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDelete = this.handleDelete.bind(this);
     // this.removeItem = this.removeItem.bind(this);
     // this.handleUpdate = this.handleUpdate.bind(this);
-    // this.updateItems = this.updateItems.bind(this);
+    this.paginate = this.paginate.bind(this);
   }
 
   componentDidMount() {
@@ -20,17 +21,17 @@ class Body extends React.Component {
       type: 'get',
       data: { search: { text: this.state.search_term } },
       success: (response) => {
-        this.setState({ giphs: response })
-        console.log('mount search success!')
+        this.paginate(response);
+        console.log('mount search success!');
       },
       error: (xhr) => {
-        console.log('mount search error')
+        console.log('mount search error');
       }
     })
     // $.ajax(
     //   `/api/v1/giphs/search?=${ this.state.search_term }`,
     //   (response) => {
-    //     this.setState({ giphs: response });
+    //     this.setState({ gifs: response });
     //     console.log("Items set");
     //   }
     // );
@@ -51,13 +52,14 @@ class Body extends React.Component {
   //   });
   // }
 
-  // updateItems(item) {
-  //   var updatedItems = this.state.items.filter((i) => {
-  //     return i.id != item.id;
-  //   }).concat(item);
+  paginate(newGifs) {
+    // var updatedGifs = this.state.gifs.filter((g) => {
+    //   return g.id != gif.id;
+    // }).concat(gif);
 
-  //   this.setState({ items: updatedItems });
-  // }
+    const updatedGifs = this.state.gifs.concat(newGifs);
+    this.setState({ gifs: updatedGifs });
+  }
 
   // handleDelete(id) {
   //   $.ajax({
@@ -91,7 +93,8 @@ class Body extends React.Component {
     return (
       <div>
         <h1>Giphty Giphs From Giphy</h1>
-        <AllGiphs giphs={this.state.giphs} />
+        <AllGifs gifs={this.state.gifs} />
+        <Paginate />
       </div>
       //{//<Results giphs={this.state.giphs} onUpdate={this.handleUpdate} />}
         //{//<Search handleSubmit={this.handleSubmit} />
