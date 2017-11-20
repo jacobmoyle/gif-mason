@@ -1,6 +1,6 @@
-class CreateGiphs < ActiveRecord::Migration[5.0]
+class CreateGifs < ActiveRecord::Migration[5.0]
   def change
-    create_table :giphs do |t|
+    create_table :gifs do |t|
 
       t.timestamps
     end

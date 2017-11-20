@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  get 'api/v1/giphs/search', :to => 'api/v1/giphs#search'
+  get 'api/v1/gifs/search', :to => 'api/v1/gifs#search'
 end

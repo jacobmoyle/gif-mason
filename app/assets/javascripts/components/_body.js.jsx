@@ -5,37 +5,41 @@ class Body extends React.Component {
     this.state = {
       gifs: [],
       offset: 0,
-      search_term: "welcome"
+      search_term: "cheers"
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDelete = this.handleDelete.bind(this);
     // this.removeItem = this.removeItem.bind(this);
     // this.handleUpdate = this.handleUpdate.bind(this);
-    this.paginate = this.paginate.bind(this);
+    this.addToDom = this.addToDom.bind(this);
+    this.searchApi = this.searchApi.bind(this);
   }
 
   componentDidMount() {
+    this.searchApi();
+
+    console.log('Body mounted: ');
+  }
+
+  searchApi() {
     $.ajax({
-      url: '/api/v1/giphs/search',
+      url: '/api/v1/gifs/search',
       type: 'get',
-      data: { search: { text: this.state.search_term } },
-      success: (response) => {
-        this.paginate(response);
+      data: { 
+        search: { 
+          text: this.state.search_term,
+          offset: this.state.offset
+        } 
+      },
+      success: (newGifs) => {
+        this.addToDom(newGifs);
         console.log('mount search success!');
       },
       error: (xhr) => {
         console.log('mount search error');
       }
     })
-    // $.ajax(
-    //   `/api/v1/giphs/search?=${ this.state.search_term }`,
-    //   (response) => {
-    //     this.setState({ gifs: response });
-    //     console.log("Items set");
-    //   }
-    // );
-    console.log('Body mounted: ');
   }
 
   // handleUpdate(item) {
@@ -52,13 +56,17 @@ class Body extends React.Component {
   //   });
   // }
 
-  paginate(newGifs) {
+  addToDom(newGifs) {
     // var updatedGifs = this.state.gifs.filter((g) => {
     //   return g.id != gif.id;
     // }).concat(gif);
+    const combinedGifs = this.state.gifs.concat(newGifs);
+    const newOffset = combinedGifs.length;
 
-    const updatedGifs = this.state.gifs.concat(newGifs);
-    this.setState({ gifs: updatedGifs });
+    this.setState({ 
+      gifs: combinedGifs,
+      offset: newOffset,
+    });
   }
 
   // handleDelete(id) {
@@ -94,7 +102,7 @@ class Body extends React.Component {
       <div>
         <h1>Giphty Giphs From Giphy</h1>
         <AllGifs gifs={this.state.gifs} />
-        <Paginate />
+        <Paginate handlePaginate={ this.searchApi } />
       </div>
       //{//<Results giphs={this.state.giphs} onUpdate={this.handleUpdate} />}
         //{//<Search handleSubmit={this.handleSubmit} />

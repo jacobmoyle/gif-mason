@@ -1,10 +1,8 @@
 class Paginate extends React.Component {
-  
-  
   render() {
     return (
       <div>
-        <button type='submit'>Paginate</button>
+        <button onClick={ () => this.props.handlePaginate() } type='submit'>Show more...</button>
       </div>  
     )
   }
